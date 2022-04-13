@@ -44,12 +44,17 @@ fun main(args: Array<String>) {
 
 fun getSheetsNumber(doc: Document): Int {
     var sheetsNumber = -1
-    for (sheetRow in doc.getElementsByClass("altrow0")) {
-        for (e in sheetRow.allElements)
-            if (e.text() == "Sheets") {
-                sheetsNumber = sheetRow.allElements.last().text().toInt()
+    for (sheetRow in doc.getElementsByClass("updatesheeticons")) { //looks for elements labeled "updatesheeticons" (each category) and proceeds to loop through them
+        for (e in sheetRow.allElements){ //loops through every element in previously mentioned categories
+            for (x in e.getElementsByTag("a")){//finds 'a' tagged elements, adds a count when it finds one
+                sheetsNumber +=1
             }
+        }
     }
+    if (sheetsNumber >= 0){
+        sheetsNumber +=1
+    }
+    //print(sheetsNumber)
     return sheetsNumber
 }
 
